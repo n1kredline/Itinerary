@@ -1,22 +1,26 @@
 package com.n1kredline;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector3;
 
 public class ItineraryInputController implements InputProcessor {
 
     private Spaceship spaceship;
+    private Vector3 touchPos;
 
     public ItineraryInputController(Spaceship spaceship) {
         this.spaceship = spaceship;
+        touchPos = new Vector3();
     }
 
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.LEFT) {
-            spaceship.leftController();
+            spaceship.stepLeft();
         } else if (keycode == Input.Keys.RIGHT) {
-            spaceship.righrController();
+            spaceship.stepRight();
         }
 
         return false;
@@ -34,6 +38,11 @@ public class ItineraryInputController implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            if (Gdx.input.getX() <= Gdx.graphics.getWidth() / 2) {
+                spaceship.stepLeft();
+            } else if (Gdx.input.getX() >= Gdx.graphics.getWidth() / 2) {
+                spaceship.stepRight();
+            }
         return false;
     }
 

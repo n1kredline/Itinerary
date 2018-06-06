@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class Spaceship {
 
     private final float LEFT;
-    private final float CENTRE;
+    private final float CENTER;
     private final float RIGHT;
 
     private float position;
@@ -30,10 +30,10 @@ public class Spaceship {
         spaceship.y = Gdx.graphics.getHeight() * 0.04f;
 
         LEFT = Gdx.graphics.getWidth() / 6 - spaceship.width / 2;
-        CENTRE = Gdx.graphics.getWidth() / 2 - spaceship.width / 2;
+        CENTER = Gdx.graphics.getWidth() / 2 - spaceship.width / 2;
         RIGHT = Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 6 - spaceship.width / 2;
 
-        position = CENTRE;
+        position = CENTER;
         life = 0;
     }
 
@@ -42,23 +42,18 @@ public class Spaceship {
         batch.draw(spaceshipImage, position, spaceship.y, spaceship.width, spaceship.height);
     }
 
-    public Rectangle getSpaceship() {
-        return spaceship;
-    }
-
-    public void leftController() {
-        if (position == CENTRE) {
+    public void stepLeft() {
+        if (position == CENTER) {
             position = LEFT;
         } else if (position == RIGHT) {
-            position = CENTRE;
+            position = CENTER;
         }
     }
-
-    public void righrController() {
-        if (position == CENTRE) {
+    public void stepRight() {
+        if (position == CENTER) {
             position = RIGHT;
         } else if (position == LEFT) {
-            position = CENTRE;
+            position = CENTER;
         }
     }
 }

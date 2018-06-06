@@ -49,7 +49,7 @@ public class MegaItineraryGame extends ApplicationAdapter {
         spacesMusic.play();
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 480, 800);
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         batch = new SpriteBatch();
 
