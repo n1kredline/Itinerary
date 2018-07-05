@@ -8,13 +8,10 @@ import java.awt.Rectangle;
 
 public abstract class Figure extends Rectangle{
 
-    public Figure(String nameImage){
-        Texture image = new Texture(Gdx.files.internal(nameImage));
+    public Figure(Texture image){
+
         super.width = (int) (Gdx.graphics.getWidth() * 0.25f);
         super.height = super.width * image.getHeight() / image.getWidth();
-    }
-
-    public void create(){
 
     }
 

@@ -5,41 +5,39 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Mine extends DeclineFigure {
+public class Mine extends FallingFigure {
 
     private Texture mineImage;
-    private Sound explosionSound;
 
-    public Mine(){
-        super();
+    public Mine(Texture mineImage, Sound explosionSound) {
+        super(mineImage, explosionSound);
 
-        mineImage = new Texture(Gdx.files.internal("mine.png"));
-        explosionSound = Gdx.audio.newSound(Gdx.files.internal("explosion.mp3"));
+        this.mineImage = mineImage;
 
-    }
-    @Override
-    public void contact() {
+        int[] mas = new int[3];
+        mas[0] = Gdx.graphics.getWidth() / 6 - ((int) (Gdx.graphics.getWidth() * 0.25f) / 2);
+        mas[1] = Gdx.graphics.getWidth() / 2 - ((int) (Gdx.graphics.getWidth() * 0.25f) / 2);
+        mas[2] = Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 6 - ((int) (Gdx.graphics.getWidth() * 0.25f) / 2);
 
-    }
+        int x = (int) (Math.random() * 3);
 
-    @Override
-    public void fallingFigure() {
-
-    }
-
-    @Override
-    public void playAudio() {
+        super.width = (int) (Gdx.graphics.getWidth() * 0.25f);
+        super.height = super.width * mineImage.getHeight() / mineImage.getWidth();
+        super.x = mas[x];
+        super.y = Gdx.graphics.getHeight() - super.height;
 
     }
 
     @Override
-    public void destroy() {
-
+    public void contactWithSpaceship(Spaceship spaceship) {
+        super.contactWithSpaceship(spaceship);
+        spaceship.contactMine();
     }
 
+    @Override
     public void draw(SpriteBatch batch) {
 
-            super.draw(batch, mineImage);
+        super.draw(batch, mineImage);
 
     }
 }
